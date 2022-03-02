@@ -1,0 +1,30 @@
+;;;	File name:	HeartAttackTest-Mt.krf
+;;;	System:		FIRE
+;;;	Author:		Don Baracskay
+;;;	Created:	March 1, 2022
+;;;	Purpose:	Upload some predicates for testing of HeartAttack system
+
+;;;Microtheory Definition
+(in-microtheory HeartAttackTest-Mt)
+(isa HeartAttackTest-Mt Microtheory)
+;;;Could flip this direction, might look into it...
+(genlMt HeartAttackTest-Mt HeartAttackRF-Mt)
+(comment HeartAttackTest-Mt
+ "HeartAttackTest-Mt microtheory is for testing the predicates and horn clause existing in the other microtheories.")
+
+;;;People (for testing)
+(isa Chell Organism-Whole)
+(isa Isaac Organism-Whole)
+(isa Gordon Organism-Whole)
+(isa Dante Organism-Whole)
+(isa Cloud Organism-Whole)
+
+;;;Test Obesity
+(massOfObject Cloud (Kilogram 91))
+(heightOfObject Cloud (Meter 1.82))
+
+;;;Test Diabetes
+(a1cLevels Isaac 8.2)
+
+;;;Test Hypertension
+(systolicBloodPressure Chell (MM-Hg 140))
