@@ -11,14 +11,13 @@
 ;;;Microtheory definition
 (in-microtheory AdditionalSymptoms-Mt)
 (isa AdditionalSymptoms-Mt Microtheory)
-(comment AdditionalSymptoms-Mt 
-  "AdditionalSymptoms-Mt is for the definition of heart disease risk factors that do not currently already exist in the KB.")
-
+(comment AdditionalSymptoms-Mt
+  "AdditionalSymptoms-Mt is for the definition of heart disease risk factors that do not currently exist in the KB.")
 
 ;;;physical inactivity definition
 (isa physically-inactive BLOTypeByGenericHealthStatus)
-(comment physically-inactive 
-  "The state of being generally not active in terms of things like exercise.")
+(comment physically-inactive
+  "The state of being generally inactive.")
 
 ;;;poor diet definition
 ;;;This one likely needs some revision...

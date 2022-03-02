@@ -10,7 +10,7 @@
 ;;;Could flip this direction, might look into it...
 (genlMt HeartAttackTest-Mt HeartAttackRF-Mt)
 (comment HeartAttackTest-Mt
- "HeartAttackTest-Mt microtheory is for testing the predicates and horn clause existing in the other microtheories.")
+ "HeartAttackTest-Mt microtheory is for testing the predicates and horn clauses existing in the other microtheories.")
 
 ;;;People (for testing)
 (isa Chell Organism-Whole)
