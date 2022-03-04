@@ -10,7 +10,7 @@
 ;;;Could flip this direction, might look into it...
 (genlMt HeartAttackTest-Mt HeartAttackRF-Mt)
 (comment HeartAttackTest-Mt
- "HeartAttackTest-Mt microtheory is for testing the predicates and horn clauses existing in the other microtheories.")
+ "HeartAttackTest-Mt microtheory is for testing the predicates and horn clause existing in the other microtheories.")
 
 ;;;People (for testing)
 (isa Chell Organism-Whole)
@@ -18,6 +18,8 @@
 (isa Gordon Organism-Whole)
 (isa Dante Organism-Whole)
 (isa Cloud Organism-Whole)
+(isa Carl-Gerhard-Busch Organism-Whole)
+(isa Al Organism-Whole)
 
 ;;;Test Obesity
 (massOfObject Cloud (Kilogram 91))
@@ -28,3 +30,12 @@
 
 ;;;Test Hypertension
 (systolicBloodPressure Chell (MM-Hg 140))
+
+;;;Test Tobacco
+(doneBy TobaccoAbuse Al)
+
+
+;;;Test Multiples
+(doneBy TobaccoAbuse Carl-Gerhard-Busch)
+(systolicBloodPressure Carl-Gerhard-Busch (MM-Hg 150))
+(stateOfHealth Carl-Gerhard-Busch physically-inactive)
