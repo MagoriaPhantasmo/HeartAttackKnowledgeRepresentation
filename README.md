@@ -1,7 +1,9 @@
 # HeartAttackKnowledgeRepresentation
-A Final Project for my group in Knowledge Representation class.  
 
+This is project is designed to help individuals understand if they have risk factors
+that could lead to heart disease, specifically heart attacks, utilizing the NextKB
+ontology.
 
-For use with the CycOntology.  Each .krf file should be added as a flatfile to Companions.
+This work is a part of a course project.
 
-TODO: More exhaustive testing.  Add functionality to determine patients' risk percentage.
+Each .krf file should be added as a flatfile to Companions.

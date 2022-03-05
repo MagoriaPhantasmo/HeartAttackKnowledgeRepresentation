@@ -1,52 +1,26 @@
-;;; 	File name: 	HeartAttackRF-Mt.krf
+;;; File name: HeartAttackRF-Mt.krf
 ;;;	System: 	FIRE
 ;;;	Author: 	Don Baracskay
 ;;;	Created:	February 23, 2022
-;;;	Purpose:	HeartAttack System
+;;;	Purpose:	Determine if one has risk factors for heart diseaes, specifically
+;;; a heart attack, using Diagnostic-Mt and AdditionalSymptoms-Mt.
 
-;;; NOTES: Basically, my though process for defining if a person has a disease or condition for the 7 risk factors
-;;;	most diseases can defined as or are already defined as AilmentCondition which is a spec of PhysiologicalCondition
-;;;	several are also specs of themselves
-;;;AilmentCondition can be referenced by hasDisease
-;;;1. Hypertension - exists in KB, however, should add context of diagnosis based on systolic blood pressure > 130 mmHg
-;;; KB Hypertension is a spec of AilmentCondition
-;;; specs include Hypertension and Hypertension-Systemic
-;;;2. Dyslipidemia - exists in KB, as with above should diagnose based on total cholesterol > 170 mg/dl 
-;;; KB Dyslipidemia is a spec of OtherDisease, which in turn is a spec of AilmentCondition
-;;; 	specs including Hypercholesterolemia 
-;;;3. Diabetes - several versions of Diabetes exist in the KB, including insipidus, gestational, mellitus type 1 and 2, potentially could use this to expand ;;;	project
-;;; KB DiabetesInsipidus is a spec of AilmentCondition
-;;; KB DiabetesMellitus is a spec of EndocrineDisorder, which in turn is a spec of AilmentCondition (DM can also trace back to PhysiologicalCondition)
-;;; diagnose base on A1C hemoglobin biomarker
-;;;4. Physical Inactivity - currently not found this to exist in KB, for now will define a UnaryPredicate: physically-inactive in child microtheory: ;;;AdditionalSymptoms-Mt
-;;;5. Poor Diet - KB also appears to lack this, again will define as a UnaryPredicate: has-poor-diet in AdditionalSymptoms-Mt
-;;;6. Obesity - exists in the KB, need to add diagnosis based on BMI > 25 kg/m^2
-;;; KB Obesity is a spec of OtherDisease, which is a spec of AilmentCondition
-;;; 	specs include MorbidObesity
-;;;7. Tobacco abuse - astonishingly exists in the KB, need to also add active condition as well as quit time
-;;; 	spec of SubstanceAbuse, which in turn is a spec of HumanActivity, which is a spec of IntelligentAgentActivity, which can be referenced by doneBy
-
-;;;stateOfAilment appears to be the best way to say that a person is at risk of something
-;;;	it has arguments of BiologicalLivingObject (in our case a person), OrganismTypeByAilment (in our case the Collection AtRisk), and 
-;;;PhysiologicalConditionType (which for our purposes would be HeartAttack)
-;;; HeartAttack has a spec: AcuteMyocardialInfarction
-;;;Please note that CardiacArrest also exists in the KB
-
-;;;Microtheory Definition
+;;; Microtheory Definition
 (in-microtheory HeartAttackRF-Mt)
 (isa HeartAttackRF-Mt Microtheory)
 (genlMt HeartAttackRF-Mt Diagnostic-Mt)
 (genlMt HeartAttackRF-Mt AdditionalSymptoms-Mt)
 (comment HeartAttackRF-Mt
- "HeartAttackRF-Mt microtheory is used to take in patients' risk factor status and determine if they are a risk for Heart Disease - specifically mycardial infarctions.")
+ "HeartAttackRF-Mt microtheory is used to take in patients' risk factor status and
+ determine if they are a risk for Heart Disease - specifically mycardial infarctions.")
 
-;;;Predicate Definition
+;;; Predicate Definition
 (isa heartRiskCnt Predicate)
 (arity heartRiskCnt 2)
 (arg1Isa heartRiskCnt Organism-Whole)
 (arg2Isa heartRiskCnt RationalNumber)
 
-;;;Horn Clause Definitions 
+;;;Horn Clause Definitions
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(hasDisease ?person Hypertension))
 (<== (stateOfAilment ?person AtRisk HeartAttack)
@@ -62,15 +36,50 @@
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(doneBy TobaccoAbuse ?person))
 
-;;;NEW Risk Count
+;;; Risk Factor Count
 (<== (heartRiskCnt ?person ?n)
 	(stateOfAilment ?person AtRisk HeartAttack)
 	(evaluate ?n
   		(LengthOfListFn
     			(SetToListFn
       				(SetOfSetsUnionFn
-        				(TheSet	
+        				(TheSet
 	  (TheClosedRetrievalSetOf ?condition (ist-Information HeartAttackTest-Mt (hasDisease ?person ?condition)))
           (TheClosedRetrievalSetOf ?behavior (ist-Information HeartAttackTest-Mt (doneBy ?behavior ?person)))
 	  (TheClosedRetrievalSetOf ?lifestyle (ist-Information HeartAttackTest-Mt (stateOfHealth ?person ?lifestyle)))
 ))))))
+
+
+
+
+
+
+;;; NOTES: Basically, my though process for defining if a person has a disease or condition for the 7 risk factors
+;;;	most diseases can defined as or are already defined as AilmentCondition which is a spec of PhysiologicalCondition
+;;;	several are also specs of themselves
+
+;;;AilmentCondition can be referenced by hasDisease
+
+;;;1. Hypertension - exists in KB, however, should add context of diagnosis based on systolic blood pressure > 130 mmHg
+;;; KB Hypertension is a spec of AilmentCondition
+;;; specs include Hypertension and Hypertension-Systemic
+;;;2. Dyslipidemia - exists in KB, as with above should diagnose based on total cholesterol > 170 mg/dl
+;;; KB Dyslipidemia is a spec of OtherDisease, which in turn is a spec of AilmentCondition
+;;; 	specs including Hypercholesterolemia
+;;;3. Diabetes - several versions of Diabetes exist in the KB, including insipidus, gestational, mellitus type 1 and 2, potentially could use this to expand ;;;	project
+;;; KB DiabetesInsipidus is a spec of AilmentCondition
+;;; KB DiabetesMellitus is a spec of EndocrineDisorder, which in turn is a spec of AilmentCondition (DM can also trace back to PhysiologicalCondition)
+;;; diagnose base on A1C hemoglobin biomarker
+;;;4. Physical Inactivity - currently not found this to exist in KB, for now will define a UnaryPredicate: physically-inactive in child microtheory: ;;;AdditionalSymptoms-Mt
+;;;5. Poor Diet - KB also appears to lack this, again will define as a UnaryPredicate: has-poor-diet in AdditionalSymptoms-Mt
+;;;6. Obesity - exists in the KB, need to add diagnosis based on BMI > 25 kg/m^2
+;;; KB Obesity is a spec of OtherDisease, which is a spec of AilmentCondition
+;;; 	specs include MorbidObesity
+;;;7. Tobacco abuse - astonishingly exists in the KB, need to also add active condition as well as quit time
+;;; 	spec of SubstanceAbuse, which in turn is a spec of HumanActivity, which is a spec of IntelligentAgentActivity, which can be referenced by doneBy
+
+;;;stateOfAilment appears to be the best way to say that a person is at risk of something
+;;;	it has arguments of BiologicalLivingObject (in our case a person), OrganismTypeByAilment (in our case the Collection AtRisk), and
+;;;PhysiologicalConditionType (which for our purposes would be HeartAttack)
+;;; HeartAttack has a spec: AcuteMyocardialInfarction
+;;;Please note that CardiacArrest also exists in the KB
