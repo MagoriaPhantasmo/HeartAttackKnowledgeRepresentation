@@ -4,38 +4,52 @@
 ;;;	Created:	March 1, 2022
 ;;;	Purpose:	Upload some predicates for testing of HeartAttack system
 
-;;;Microtheory Definition
+;;; Microtheory Definition
 (in-microtheory HeartAttackTest-Mt)
 (isa HeartAttackTest-Mt Microtheory)
-;;;Could flip this direction, might look into it...
 (genlMt HeartAttackTest-Mt HeartAttackRF-Mt)
 (comment HeartAttackTest-Mt
- "HeartAttackTest-Mt microtheory is for testing the predicates and horn clause existing in the other microtheories.")
+ "HeartAttackTest-Mt microtheory is for testing the predicates and horn clauses existing in the other microtheories.")
 
-;;;People (for testing)
+;;; Cases for testing
 (isa Chell Organism-Whole)
 (isa Isaac Organism-Whole)
 (isa Gordon Organism-Whole)
-(isa Dante Organism-Whole)
 (isa Cloud Organism-Whole)
-(isa Carl-Gerhard-Busch Organism-Whole)
 (isa Al Organism-Whole)
 
-;;;Test Obesity
+(isa Dante Organism-Whole)
+(isa Carl-Gerhard-Busch Organism-Whole)
+(isa Michael Organism-Whole)
+
+
+;;; Test Hypertension
+(systolicBloodPressure Chell (MM-Hg 140))
+
+;;; Test Dyslipidemia
+(cholesterolLevel Issac (mg/dl 165))
+
+;;; Test Diabetes
+(a1cLevels Gordon 8.2)
+
+;;; Test Obesity
 (massOfObject Cloud (Kilogram 91))
 (heightOfObject Cloud (Meter 1.82))
 
-;;;Test Diabetes
-(a1cLevels Isaac 8.2)
-
-;;;Test Hypertension
-(systolicBloodPressure Chell (MM-Hg 140))
-
-;;;Test Tobacco
+;;; Test Tobacco
 (doneBy TobaccoAbuse Al)
 
+;;; Test Physical inactivity
+;;; Test Poor diet
 
-;;;Test Multiples
-(doneBy TobaccoAbuse Carl-Gerhard-Busch)
-(systolicBloodPressure Carl-Gerhard-Busch (MM-Hg 150))
-(stateOfHealth Carl-Gerhard-Busch physically-inactive)
+
+
+;;; Risk factor count
+(systolicBloodPressure Michael (MM-Hg 125))
+(cholesterolLevel Issac (mg/dl 190))
+(a1cLevels Gordon 8.2)
+(massOfObject Cloud (Kilogram 100))
+(heightOfObject Cloud (Meter 1.85))
+(doneBy TobaccoAbuse Michael)
+(stateOfHealth Michael physically-inactive)
+(stateOfHealth Michael has-poor-diet)
