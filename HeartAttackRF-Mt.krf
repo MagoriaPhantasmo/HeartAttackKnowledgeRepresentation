@@ -23,16 +23,22 @@
 ;;;Horn Clause Definitions
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(hasDisease ?person Hypertension))
+
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(hasDisease ?person Dyslipidemia))
+
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(hasDisease ?person DiabetesMellitus))
+
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(stateOfHealth ?person physically-inactive))
+
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(stateOfHealth ?person has-poor-diet))
+
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(hasDisease ?person Obesity))
+
 (<== (stateOfAilment ?person AtRisk HeartAttack)
 	(doneBy TobaccoAbuse ?person))
 
