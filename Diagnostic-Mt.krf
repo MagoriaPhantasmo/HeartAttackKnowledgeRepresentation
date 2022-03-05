@@ -21,7 +21,6 @@
 (<== (hasDisease ?person Hypertension)
 	(systolicBloodPressure ?person (MM-Hg ?BP))
 	(evaluate True (GreaterThan-UnitValuesFn ?BP 130))
-
 )
 
 ;;; Dyslipidemia defined by total cholesterol > 170 mg/dl or 1.7 mg/ml
@@ -53,5 +52,3 @@
 	(evaluate ?BMI (QuotientFn ?m (TimesFn ?h ?h)))
 	(evaluate True (GreaterThan-UnitValuesFn ?BMI 25))
 )
-
-;;; Add TobaccoAbuse
