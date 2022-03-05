@@ -23,7 +23,6 @@
 ;;; Test case for total risk factor counting for a person
 (isa Michael Organism-Whole)
 
-
 ;;; Test Hypertension
 (systolicBloodPressure Chell (MM-Hg 140))
 
