@@ -46,12 +46,12 @@
 (stateOfHealth Carl-Gerhard-Busch has-poor-diet)
 
 ;;; Risk factor count
-;;; Answer should be 5 due to dyslipidemia, diabetes, tobacco abuse, being physicially inactive, having a poor diet.
+;;; Answer should be 5 due to dyslipidemia, diabetes, tobacco abuse, being physically inactive, having a poor diet.
 (systolicBloodPressure Michael (MM-Hg 125))
-(cholesterolLevel Issac (mg/dl 190))
-(a1cLevels Gordon 8.2)
-(massOfObject Cloud (Kilogram 100))
-(heightOfObject Cloud (Meter 1.85))
+(cholesterolLevel Michael (mg/dl 190))
+(a1cLevels Michael 8.2)
+(massOfObject Michael (Kilogram 100))
+(heightOfObject Michael (Meter 1.85))
 (doneBy TobaccoAbuse Michael)
 (stateOfHealth Michael physically-inactive)
 (stateOfHealth Michael has-poor-diet)
