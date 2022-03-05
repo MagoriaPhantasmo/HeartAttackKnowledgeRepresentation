@@ -27,7 +27,7 @@
 (systolicBloodPressure Chell (MM-Hg 140))
 
 ;;; Test Dyslipidemia
-(cholesterolLevel Issac (mg/dl 175))
+(cholesterolLevel Isaac 175)
 
 ;;; Test Diabetes
 (a1cLevels Gordon 8.2)
@@ -48,7 +48,7 @@
 ;;; Risk factor count
 ;;; Answer should be 5 due to dyslipidemia, diabetes, tobacco abuse, being physically inactive, having a poor diet.
 (systolicBloodPressure Michael (MM-Hg 125))
-(cholesterolLevel Michael (mg/dl 190))
+(cholesterolLevel Michael 190)
 (a1cLevels Michael 8.2)
 (massOfObject Michael (Kilogram 100))
 (heightOfObject Michael (Meter 1.85))
