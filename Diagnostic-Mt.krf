@@ -2,8 +2,8 @@
 ;;;	System:		FIRE
 ;;;	Author:		Don Baracskay
 ;;;	Created:	February 27, 2022
-;;;	Purpose:	Should take in various bodily conditions (like BMI, cholesterol level, etc.)
-;;;				and output the associated risk factor
+;;;	Purpose:	Take in various measurements and output whether someone has a risk
+;;; factor for heart disease.
 
 ;;; Microtheory Definition
 (in-microtheory Diagnostic-Mt)
@@ -14,31 +14,9 @@
  patient and help them understand if they have risk factors for heart disease.")
 
 
-;;; Condition Definitions
-
-;;; BMI as bodyMassIndex is a relation between HUMAN and NUMBER (BMI)
-;;; Mass exists, but is not a relation, additionally members of collection lack associated number
-;;; Therefore, will create a relation hasMass in the same vein as bodyMassIndex
-;;; height however exists as heightOfObject OBJECT HEIGHT (Must be a Distance)
-
-;;; valueOf may be a good choice for this kind of thing...
-;;; valueOf is a relation between two quantities,
-;;;	so using the function ((QPQuantityFn $measurementtype) $thingbeingmeasured) and ($unit $value)
-;;;	all wrapped by valueOf should allow us to set any value we want for a patient
-
+;;; Risk Factor Definitions
 
 ;;; Hypertension SBP > 130
-;;; Need to define relation that specifies a person's systolic blood pressure: sbpofPerson
-;;; later discovered this was redundant, wasting minutes of progress...
-;;; (isa sbpOfPerson Predicate)
-;;; (arity sbpOfPerson 2)
-;;; (arg1Isa sbpOfPerson Organism-Whole)
-;;; (arg2Isa sbpOfPerson Pressure)
-;;; (comment sbpOfPerson
-;;; "sbpOfPerson is a relation between an organism and its systolic blood pressure.")
-
-;;; this on the other hand, I cannot joke about, it took many hours to determine that order is monumentaly important
-;;; MUST assign value to variable BEFORE evaluating it...
 (<== (hasDisease ?person Hypertension)
 	(systolicBloodPressure ?person (MM-Hg ?BP))
 	(evaluate True (GreaterThan-UnitValuesFn ?BP 130))
@@ -46,14 +24,13 @@
 )
 
 ;;; Dyslipidemia > 170 mg/dl OR 1.7 mg/ml
-;;; cholesterol level already exists... as cholesterolLevel (which relates the two with an int, instead of a concentration level,
-;;;	for some reason.  I think this thing has become too monolithic to notice issues like this
 (<== (hasDisease ?person Dyslipidemia)
 	(cholesterolLevel ?person ?CL)
 	(evaluate True (GreaterThan-UnitValuesFn ?CL 170))
 )
 
 ;;; Diabetes A1C > 6.3% -> new predicate: a1cLevels
+
 (isa a1cLevels Predicate)
 (arity a1cLevels 2)
 (arg1Isa a1cLevels Organism-Whole)
@@ -61,6 +38,7 @@
 (comment a1cLevels
  "a1cLevels is a relation between an organism and its level of the hemoglobin A1c in the blood.
  A1C reflects an individuals blood glucose over several months.")
+
 (<== (hasDisease ?person DiabetesMellitus)
 	(a1cLevels ?person ?A1C)
 	(evaluate True (GreaterThan-UnitValuesFn ?A1C 6.3))
@@ -74,6 +52,3 @@
 	(evaluate ?BMI (QuotientFn ?m (TimesFn ?h ?h)))
 	(evaluate True (GreaterThan-UnitValuesFn ?BMI 25))
 )
-
-;;;Could add some sort of TobaccoAbuse thing
-;;;Basically would take in the last time a person smoked and determine if they suffer from tobacco abuse

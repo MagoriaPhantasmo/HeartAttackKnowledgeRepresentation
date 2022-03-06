@@ -9,7 +9,8 @@
 (in-microtheory AdditionalSymptoms-Mt)
 (isa AdditionalSymptoms-Mt Microtheory)
 (comment AdditionalSymptoms-Mt
-  "AdditionalSymptoms-Mt is for the definition of heart disease risk factors that do not currently exist in the KB.")
+  "AdditionalSymptoms-Mt is for the definition of heart disease risk factors
+  that do not currently exist in the KB.")
 
 ;;; Physical inactivity definition
 ;;; Uses state of health predicate
